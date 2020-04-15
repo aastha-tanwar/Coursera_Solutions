@@ -1,12 +1,9 @@
-pipeline {
-    agent {
-        docker { image 'node:7-alpine' }
+node{
+    def app
+    stage('Clone repository'){
+        checkout scm
     }
-    stages {
-        stage('Test') {
-            steps {
-                sh 'node --version'
-            }
-        }
+    stage('Build image'){
+        app=docker.build("aasthatest")
     }
 }
